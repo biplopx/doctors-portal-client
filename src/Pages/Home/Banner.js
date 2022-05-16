@@ -5,7 +5,7 @@ import PrimaryBtn from '../Shared/PrimaryBtn';
 const Banner = () => {
   return (
     <>
-      <div className="hero min-h-screen">
+      <div className="bg-[url('/src/assets/images/bg.png')] hero min-h-screen">
         <div className="hero-content flex-col lg:flex-row-reverse px-10">
           <img src={chair} className="max-w-sm shadow-2xl m-0" alt='chair' />
           <div>

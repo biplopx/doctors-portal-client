@@ -5,7 +5,7 @@ import PrimaryBtn from '../Shared/PrimaryBtn';
 const Contact = () => {
   return (
     <section style={{
-      background: `url(${appointment}) center center/cover`
+      background: `url(${appointment}) no-repeat center center/cover`
     }} className="p-10">
       <div className='text-center pb-14 text-white'>
         <p className='text-xl font-bold bg-clip-text text-secondary'>
