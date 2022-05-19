@@ -3,9 +3,10 @@ import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link } from 'react-router-dom';
 import auth from '../../firebase.int';
+import Loading from './Loading';
 
 const Navbar = () => {
-  const [user, loading, error] = useAuthState(auth);
+  const [user, loading] = useAuthState(auth);
   const logout = () => {
     signOut(auth);
     localStorage.removeItem('accessToken');
@@ -20,6 +21,10 @@ const Navbar = () => {
     <li>{user ? <button onClick={logout} className="btn btn-active btn-ghost">Sign Out</button>
       : <Link to="/login">Login</Link>}</li>
   </>
+
+  if (loading) {
+    return <Loading></Loading>
+  }
 
   return (
 
