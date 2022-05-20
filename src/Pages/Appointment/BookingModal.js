@@ -26,7 +26,7 @@ const BookingModal = ({ date, treatment, setTreatment, refetch }) => {
       phone: event.target.value
     }
 
-    fetch('http://localhost:5000/booking', {
+    fetch('https://doctors-portal-mbh.herokuapp.com/booking', {
       method: 'POST',
       headers: {
         'content-type': 'application/json'
@@ -43,6 +43,7 @@ const BookingModal = ({ date, treatment, setTreatment, refetch }) => {
         else {
           toast.error(`Already have and appointment, ${data.booking?.date} at ${data.booking?.slot}`)
         }
+        refetch();
         setTreatment(null);
       });
   }

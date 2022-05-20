@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import React, { useEffect, useState } from 'react';
+import { useSendPasswordResetEmail, useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { useForm } from "react-hook-form";
 import Loading from '../Shared/Loading';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
@@ -16,9 +16,14 @@ const Login = () => {
     error,
   ] = useSignInWithEmailAndPassword(auth);
 
+  const [sendPasswordResetEmail, sending] = useSendPasswordResetEmail(
+    auth
+  );
+
   const [token] = useToken(user || gUser);
 
   let signInError;
+  const [passEmail, setPassEmail] = useState('');
   const navigate = useNavigate();
   const location = useLocation();
   let from = location.state?.from?.pathname || "/";
@@ -47,13 +52,13 @@ const Login = () => {
         <div className="card-body">
           <h2 className="text-center text-2xl font-bold">Login</h2>
           <form onSubmit={handleSubmit(onSubmit)}>
-
             <div className="form-control w-full max-w-xs">
               <label className="label">
                 <span className="label-text">Email</span>
               </label>
               <input
                 type="email"
+                onChange={(e) => setPassEmail(e.target.value)}
                 placeholder="Your Email"
                 className="input input-bordered w-full max-w-xs"
                 {...register("email", {
@@ -101,6 +106,7 @@ const Login = () => {
             <input className='btn w-full max-w-xs text-white' type="submit" value="Login" />
           </form>
           <p><small>New to Doctors Portal <Link className='text-primary' to="/signup">Create New Account</Link></small></p>
+          <p>Forget Password? <button className="btn btn-xs">Reset Pass</button></p>
           <div className="divider">OR</div>
           <button
             onClick={() => signInWithGoogle()}
